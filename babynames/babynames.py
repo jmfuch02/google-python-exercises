@@ -41,17 +41,32 @@ def extract_names(filename):
   ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
   """
   f = open(filename, 'rU')
-  
+  filestring = f.read()
+    
   #Get the year first
-  match = re.search(r'in\s+(\d\d\d\d)', f.read())
-  if match:
-    print match.group(1)
+  match = re.search(r'in\s+(\d\d\d\d)', filestring)
+  year = match.group(1)
+  #if match:
+  #  print match.group(1)
   
   #Get the name-rank strings
-  #match = re.search(r'
+  tuples = re.findall(r'(\d+)<.*?><.*?>(\w*)<.*?><.*?>(\w*)', filestring)
+  #print tuples
   
+  #Create a dict with names and ranks
+  namerankdict = {}
+  for tuple in tuples:
+    namerankdict[tuple[1]] = tuple[0]
+    namerankdict[tuple[2]] = tuple[0]
+  #print namerankdict
   
-  return
+  nameranklist = []
+  nameranklist.append(year)
+  for key in sorted(namerankdict.keys()):
+    nameranklist.append(key + " " + namerankdict[key])
+  #print nameranklist
+     
+  return nameranklist
 
 
 def main():
@@ -74,7 +89,7 @@ def main():
   # For each filename, get the names, then either print the text output
   # or write it to a summary file
   
-  extract_names(args[0])
+  print extract_names(args[0])
   
 if __name__ == '__main__':
   main()

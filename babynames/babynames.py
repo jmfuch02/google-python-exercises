@@ -89,7 +89,13 @@ def main():
   # For each filename, get the names, then either print the text output
   # or write it to a summary file
   
-  print extract_names(args[0])
+  if summary == True:
+    summaryfilehandle = open('summaryfile.txt', 'w')
+    for arg in args:
+        summaryfilehandle.write(str(extract_names(arg)))
+  else:
+    for arg in args:
+        print extract_names(arg)
   
 if __name__ == '__main__':
   main()

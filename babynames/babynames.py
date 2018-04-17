@@ -65,8 +65,9 @@ def extract_names(filename):
   for key in sorted(namerankdict.keys()):
     nameranklist.append(key + " " + namerankdict[key])
   #print nameranklist
-     
-  return nameranklist
+  ranklisttext = '\n'.join(nameranklist) + '\n'
+       
+  return ranklisttext
 
 
 def main():
@@ -90,8 +91,10 @@ def main():
   # or write it to a summary file
   
   if summary == True:
-    summaryfilehandle = open('summaryfile.txt', 'w')
+    #summaryfilehandle = open('summaryfile.txt', 'w')
+    print args
     for arg in args:
+        summaryfilehandle = open(arg + '.summary.txt', 'w')
         summaryfilehandle.write(str(extract_names(arg)))
   else:
     for arg in args:

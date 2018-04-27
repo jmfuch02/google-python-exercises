@@ -18,6 +18,24 @@ import commands
 # +++your code here+++
 # Write functions and modify main() to call them
 
+def get_special_paths(dir):
+    
+    special_paths = []
+    filenames = os.listdir(dir)
+    for filename in filenames:
+        if re.search(r'__\w__', filename) == true:
+            special_paths.append(str(filename + '\n'))
+
+    print special_paths
+    return special_paths
+    
+ #def copy_to(paths, dir):
+ #   return status
+    
+ #def zip_to(paths, zippath):
+ #   return status
+    
+
 
 
 def main():
